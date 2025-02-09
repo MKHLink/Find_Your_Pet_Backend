@@ -9,6 +9,7 @@ import com.MKHLink.Find_Your_Pet.repositories.UserRepository;
 import com.MKHLink.Find_Your_Pet.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -34,14 +35,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto userLogin(UserRequestDto userRequestDto) {
-        User userLogin = userRepository.findByEmailAndPassword(userRequestDto.getEmail(), userRequestDto.getPassword());
+        User userLogin = userRepository.findByEmail(userRequestDto.getEmail());
+
+        if(userLogin == null) {
+            log.error("User not found");
+        }
+
+        if(!BCrypt.checkpw(userRequestDto.getPassword(), userLogin.getPassword())) {
+            log.error("Wrong password");
+        }
+
         log.info("Login user: {}", userLogin);
         return entityToDto(userLogin);
     }
 
     @Override
     public UserResponseDto saveAnimal(UserRequestDto user,Animals animal) {
-        User findUser = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        User findUser = userRepository.findByEmail(user.getEmail());
         Animals savedAnimal = Animals.builder()
                 .image(animal.getImage())
                 .name(animal.getName())
@@ -63,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto deleteAnimal(Long id, UserRequestDto userRequestDto) {
-        User findUser = userRepository.findByEmailAndPassword(userRequestDto.getEmail(), userRequestDto.getPassword());
+        User findUser = userRepository.findByEmail(userRequestDto.getEmail());
         Animals animalToDelete = animalRepository.findById(id);
         log.info("ID: {}",id);
         log.info("Deleting animal: {}", animalToDelete);
