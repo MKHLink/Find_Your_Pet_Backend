@@ -24,6 +24,6 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany
     private Set<Animals> savedAnimals;
 }
