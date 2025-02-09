@@ -14,21 +14,25 @@ public class UserController {
 
     private final UserService userService;
 
+    //registers a use
     @PostMapping("/register")
     public UserResponseDto registerUser(@RequestBody UserRequestDto userRequestDto) {
         return userService.registerUser(userRequestDto);
     }
 
+    //logs in existing user
     @PostMapping("/login")
     public UserResponseDto loginUser(@RequestBody UserRequestDto userRequestDto) {
        return userService.userLogin(userRequestDto);
     }
 
+    //saves an animal while logged in
     @PutMapping("/save-animal")
     public UserResponseDto saveAnimal(@RequestBody SaveAnimalRequestDto userAndAnimal){
         return userService.saveAnimal(userAndAnimal.getUser(), userAndAnimal.getAnimal());
     }
 
+    //deletes an animal by its id
     @DeleteMapping("/delete/{id}")
     public UserResponseDto deleteAnimal(@PathVariable Long id, @RequestBody UserRequestDto userRequestDto){
         return userService.deleteAnimal(id,userRequestDto);

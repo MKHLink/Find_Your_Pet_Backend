@@ -14,11 +14,13 @@ public class AnimalController {
     /*FOR ADMIN USE ONLY */
     private final AnimalService animalService;
 
+    //Reads all animals from datatbase
     @GetMapping
     public List<Animals> getAllAnimals() {
         return animalService.getAllAnimals();
     }
 
+    //deletes an animal by its id
     @DeleteMapping("/{id}")
     public void deleteAnimal(@PathVariable Long id) {
         animalService.deleteAninal(id);

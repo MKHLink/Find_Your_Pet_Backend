@@ -11,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponseDto {
+    //returns user email and their saved animals
     private String email;
     private Set<Animals> animals;
 }

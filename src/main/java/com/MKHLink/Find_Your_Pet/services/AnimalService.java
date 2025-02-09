@@ -7,6 +7,8 @@ import java.util.List;
 
 @Service
 public interface AnimalService {
+    //AnimalServiceImpl implements this interface
+
     List<Animals> getAllAnimals();
 
     void deleteAninal(Long id);

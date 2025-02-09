@@ -9,5 +9,4 @@ public class FindYourPetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FindYourPetApplication.class, args);
 	}
-
 }

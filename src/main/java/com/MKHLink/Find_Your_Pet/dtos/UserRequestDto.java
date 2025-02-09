@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserRequestDto {
+    //used for logged in user operations
     private String email;
     private String password;
 }

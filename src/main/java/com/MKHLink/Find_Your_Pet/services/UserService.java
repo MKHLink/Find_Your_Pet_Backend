@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
+    //UserServiceImpl implements this interface
+
     UserResponseDto registerUser(UserRequestDto userRequestDto);
 
     UserResponseDto userLogin(UserRequestDto userRequestDto);

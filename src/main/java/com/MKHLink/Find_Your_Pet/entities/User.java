@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -24,6 +23,7 @@ public class User {
     private String email;
     private String password;
 
+    //holds the set of saved animals
     @OneToMany
     private Set<Animals> savedAnimals;
 }
